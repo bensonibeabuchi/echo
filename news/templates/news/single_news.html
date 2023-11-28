@@ -1,0 +1,38 @@
+{% extends 'news/base.html' %} {% load static tailwind_tags %}{% block content%}
+
+<div class="gap-4 p-8 w-full items-center text-center justify-center">
+  <div class="p-8 bg-white shadow-md w-full rounded-lg flex-col justify-center gap-2 inline-flex">
+    <div class="p-8 bg-white shadow-md w-full rounded-lg flex-col justify-center gap-2 inline-flex">
+      <div class="font-bold text-xl">
+        <p>From {{single_article.source}}</p>
+      </div>
+
+      {% if single_article.image %}
+      <img src="{{ single_article.image }}" alt="" />
+      {% else %}
+      <img src="{% static 'images/default_image.jpg' %}" alt="" />
+      {% endif %}
+
+      <div class="flex-col justify-center items-start gap-1 flex">
+        <div class="text-stone-300 text-sm font-medium">
+          <p class="font-light text-sm italic">Author: {{ single_article.author}}</p>
+        </div>
+        <div class="w-full text-black text-xl font-normal">
+          <p class="font-semibold">{{ single_article.title}}</p>
+        </div>
+        <div class="w-full text-black text-base font-normal">
+          <p>{{ single_article.content}}</p>
+        </div>
+
+        <div class="text-blue-800 mx-auto text-base font-light text-center items-center">
+          <p>Date Published: {{ single_article.timestamp|date:"M d, Y" }}</p>
+        </div>
+        <button class="mx-auto bg-blue-600 p-4 rounded px-8">
+          <a href="{{single_article.url}}" target="_blank">Go to {{single_article.source}} website </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

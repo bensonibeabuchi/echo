@@ -1,0 +1,105 @@
+{% load static tailwind_tags%}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Echo</title>
+
+  </head>
+    {% tailwind_css %}
+   
+  </head>
+  <body>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="w-full mt-16 flex-col justify-center items-center gap-6 flex">
+        <div class="flex-col justify-start items-start gap-8 flex">
+          <div class="h-[89px] flex-col justify-center items-start gap-2 flex">
+            <p class="w-[619px] text-[40px] font-bold">Sign Up</p>
+          </div>
+          <div class="flex-col w-full justify-start items-start gap-4 flex">
+            <div class="w-full">
+              <input type="text" name="username" id="username" class="border-hidden w-full p-6 bg-blue-100" placeholder="Username" />
+            </div>
+            <div class="w-full">
+              <input type="email" name="email" id="email" class="border-hidden w-full p-6 bg-blue-100" placeholder="Email" />
+            </div>
+            <div class="w-full">
+              <input type="text" name="first_name" id="first_name" class="border-hidden w-full p-6 bg-blue-100" placeholder="First Name" />
+            </div><div class="w-full">
+              <input type="text" name="last_name" id="last_name" class="border-hidden w-full p-6 bg-blue-100" placeholder="Last Name" />
+            </div>
+            <div class="w-full">
+              <input type="password" name="password1" id="password1" class="border-hidden w-full p-6 bg-blue-100" placeholder="Password" />
+            </div>
+            <div class="w-full">
+              <input type="password" name="password2" id="password2" class="border-hidden w-full p-6 bg-blue-100" placeholder="Confirm Password" />
+            </div>
+
+            <div>
+              <button type="submit" id="submit" class="w-[619px] px-[94px] py-6 bg-blue-800 justify-center items-center gap-4 font-medium inline-flex text-white">Sign Up</button>
+            </div>
+          </div>
+        </div>
+        
+     
+        <div>
+          {% for message in messages %}
+          <div id="message" class="bg-red-100 w-[619px] border border-red-400 text-red-700 px-4 mt-8 py-3 rounded relative alert alert-dismissible fade show" role="alert">
+            <button onclick="closeAlert(this)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+        <div class="text-center">
+          {% for error in form.password2.errors %}
+          <div id="message" class="bg-red-100 w-[619px] border border-red-400 text-red-700 px-4 mt-8 py-3 rounded relative alert alert-dismissible fade show" role="alert">
+            <button onclick="closeAlert(this)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ error }}
+          </div>
+          {% endfor %}
+          <!-- {{ form.errors }} -->
+          {% for error, fields in form.errors.items %}
+          <div id="message" class="bg-red-100 w-[619px] border border-red-400 text-red-700 px-4 mt-8 py-3 rounded relative alert alert-dismissible fade show flex" role="alert">
+            <button onclick="closeAlert(this)" type="button" class="px-8" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="flex space-x-2">
+              <p>{{ error|title }}:</p>
+               <p>{{fields}}</p> 
+            </div>
+            
+          </div>
+          {% endfor %}
+        </div>
+        <div class="mx-auto">
+          <p class="text-center my-4">
+            Already have an account?
+          </p>
+          <a class="w-[619px] px-[94px] py-6 bg-blue-800 font-medium justify-center items-center gap-4 inline-flex text-white" href="{% url 'login' %}">Login</a>
+        </div>
+      </div>
+    </form>
+        
+        
+      </div>
+    </div>
+  </body>
+  <script>
+    function closeAlert(button) {
+      var alertElement = button.closest(".alert");
+
+      if (alertElement) {
+        alertElement.style.display = "none";
+      }
+    }
+  </script>
+</html>
+
+

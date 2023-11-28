@@ -1,0 +1,55 @@
+{% extends 'news/base.html' %} {% load static tailwind_tags %}{% block content%}
+<h1 class="text-center mx-auto text-2xl bg-blue-600 text-white p-4 m-4 w-3/4 font-medium">These are articles gotten from all over the world</h1>
+
+<div class="grid col-span-2 grid-cols-1 mx-auto gap-4 p-8 w-full items-center text-center justify-center">
+  {% for article in articles %}
+
+  <div class="p-8 bg-white shadow-md w-full rounded-lg flex-col justify-center gap-2 inline-flex">
+    <div class="font-bold text-xl">
+      <p>From {{article.source.name}}</p>
+    </div>
+    {% if article.urlToImage %}
+    <img src="{{ article.urlToImage }}" alt="" />
+    {% else %}
+    <img src="{% static 'images/default_image.jpg' %}" alt="" />
+    {% endif %}
+
+    <div class="flex-col justify-center items-start gap-1 flex">
+      <div class="text-stone-300 text-sm font-medium">
+        <p class="font-light text-sm italic">Author: {{ article.author}}</p>
+      </div>
+      <div class="w-full text-black text-xl font-normal">
+        <p class="font-semibold">{{ article.title}}</p>
+      </div>
+      <div class="w-full text-black text-base font-normal">
+        <p>{{ article.excerpt}}</p>
+      </div>
+
+      <div class="text-blue-800 mx-auto text-base font-light text-center items-center">
+        <p>Date Published: {{ article.publishedAt}}</p>
+      </div>
+      <button class="mx-auto my-4 rounded px-6 py-4 bg-blue-800 hover:scale-105 hover:bg-blue-900 transition">
+        <a href="{{ article.url }}" target="_blank" class="text-white">Go to Full News</a>
+      </button>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="m-4">
+    <span class="step-links">
+      {% if articles.has_previous %}
+      <a href="?page=1" class="bg-blue-800 rounded-xl py-4 px-8 text-white font-semibold">&laquo; first</a>
+      <a href="?page={{ articles.previous_page_number }} " class="bg-blue-800 rounded-xl py-4 px-8 text-white font-semibold">previous</a>
+      {% endif %}
+
+      <span class="current-page bg-blue-800 rounded-xl py-4 px-8 text-white font-semibold" class="">{{ articles.number }}</span>
+
+      {% if articles.has_next %}
+      <a href="?page={{ articles.next_page_number }}" class="bg-blue-800 rounded-xl py-4 px-8 text-white font-semibold">next</a>
+      <a href="?page={{ articles.paginator.num_pages }}" class="bg-blue-800 rounded-xl py-4 px-8 text-white font-semibold">last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+</div>
+
+{% endblock content %}

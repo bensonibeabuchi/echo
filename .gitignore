@@ -1,0 +1,5 @@
+.env
+.ds_store
+.vscode
+.DS_Store
+schema.yml

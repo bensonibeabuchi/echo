@@ -1,0 +1,64 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Echo</title>
+    {% tailwind_css %}
+  </head>
+  <body>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="w-full mt-36 flex-col justify-center items-center gap-6 flex">
+        <div class="flex-col justify-start items-start gap-8 flex">
+          <div class="h-[89px] flex-col justify-center items-start gap-2 flex">
+            <p class="w-[619px] text-[40px] font-bold">Login</p>
+          </div>
+          <div class="flex-col w-full justify-start items-start gap-4 flex">
+            <div class="w-full">
+              <input type="text" name="username" id="username" class="border-hidden w-full p-6 bg-blue-100" placeholder="Username" />
+            </div>
+            <div class="w-full">
+              <input type="password" name="password" id="password" class="border-hidden w-full p-6 bg-blue-100" placeholder="Password" />
+              <p class="m-4 items-end justify-end text-end">
+                <span class="text-sm font-semibold"><a href="{% url 'password-reset' %}"> Forgot Password?</a></span>
+              </p>
+            </div>
+
+            <div>
+              <button type="submit" id="submit" class="w-[619px] px-[94px] py-6 bg-blue-800 justify-center items-center gap-4 inline-flex font-medium text-white">Login</button>
+            </div>
+          </div>
+        </div>
+        <div></div>
+        <div>
+          {% for message in messages %}
+          <div id="message" class="bg-red-100 mx-auto w-[619px] border border-red-400 text-red-700 px-4 mt-8 py-3 rounded relative alert alert-dismissible fade show" role="alert">
+            <button onclick="closeAlert(this)" type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            {{ message }}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </form>
+    <div class="p-4 m-4 text-center">
+      <p class="p-4 font-semibold">Don't have an account?</p>
+      <div>
+        <a href="{% url 'register' %}"><button class="w-[619px] px-[94px] py-6 bg-blue-800 justify-center items-center gap-4 inline-flex font-medium text-white">Sign Up</button></a>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function closeAlert(button) {
+      var alertElement = button.closest(".alert");
+
+      if (alertElement) {
+        alertElement.style.display = "none";
+      }
+    }
+  </script>
+</html>
