@@ -10,7 +10,7 @@
   <body>
     <form action="" method="POST">
       {% csrf_token %}
-      <div class="w-full mt-36 flex-col justify-center items-center gap-6 flex">
+      <div class="w-1/5 mt-36 flex-col justify-center items-center gap-6 flex">
         <div class="flex-col justify-start items-start gap-8 flex">
           <div class="h-[89px] flex-col justify-center items-start gap-2 flex">
             <p class="w-[619px] text-[40px] font-bold">Login</p>
@@ -21,6 +21,7 @@
             </div>
             <div class="w-full">
               <input type="password" name="password" id="password" class="border-hidden w-full p-6 bg-blue-100" placeholder="Password" />
+              
               <p class="m-4 items-end justify-end text-end">
                 <span class="text-sm font-semibold"><a href="{% url 'password-reset' %}"> Forgot Password?</a></span>
               </p>
