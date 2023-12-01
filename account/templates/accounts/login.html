@@ -7,13 +7,13 @@
     <title>Echo</title>
     {% tailwind_css %}
   </head>
-  <body>
-    <form action="" method="POST">
+  <body class="mx-auto">
+    <form action="" method="POST" class="text-center mx-auto">
       {% csrf_token %}
-      <div class="w-1/5 mt-36 flex-col justify-center items-center gap-6 flex">
+      <div class="w-full mt-36 flex-col justify-center items-center gap-6 mx-auto flex">
         <div class="flex-col justify-start items-start gap-8 flex">
           <div class="h-[89px] flex-col justify-center items-start gap-2 flex">
-            <p class="w-[619px] text-[40px] font-bold">Login</p>
+            <p class="w-[619px] text-[40px] font-bold text-pink-700">Login user</p>
           </div>
           <div class="flex-col w-full justify-start items-start gap-4 flex">
             <div class="w-full">
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <div></div>
+
         <div>
           {% for message in messages %}
           <div id="message" class="bg-red-100 mx-auto w-[619px] border border-red-400 text-red-700 px-4 mt-8 py-3 rounded relative alert alert-dismissible fade show" role="alert">
