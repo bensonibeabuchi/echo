@@ -7,9 +7,10 @@ urlpatterns = [
 
        path('login/', login_page, name='login'),  # noqa
        path('logout/', logout_user, name='logout'),  # noqa
+       path('register/', register_page, name='register'),  # noqa 
+       
        path('account_activation_sent/', account_activation_sent, name='account_activation_sent'),  # noqa
        path('account_invalid_link/', account_invalid_link, name='account_invalid_link'),  # noqa
-       path('register/', register_page, name='register'),  # noqa 
        path('account_activation_complete/', account_activation_complete, name='account_activation_complete'),  # noqa
        path('activate/<uidb64>/<token>/', activate, name='activate'),  # noqa
 

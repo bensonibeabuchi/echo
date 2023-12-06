@@ -10,15 +10,19 @@
     {% tailwind_css %}
   </head>
   <body>
-    <div class="md:py-4 w-full fixed top-0 md:bg-blue-800">
-      <nav>
-        <div class="max-w-screen-2xl flex flex-row items-center justify-between mx-auto p-4">
+    <div class="md:py-4 w-full fixed top-0 bg-blue-800">
+<!-- NAVBAR -->
+      <nav class="p-4 bg-blue-800">
+        <div class="max-w-screen-2xl flex items-center justify-between mx-auto">
+          <!-- Logo -->
           <div>
             <a href="{% url 'index' %}?country=us">
               <img src="{% static 'images/echo_logo.png' %}" alt="echo logo" class="w-32 hover:scale-105 transition" />
             </a>
           </div>
-          <div class="mx-auto">
+      
+          <!-- Search form -->
+          <div class="mx-auto hidden md:flex ">
             <form action="" method="get">
               <div>
                 <div class="relative flex w-full flex-wrap">
@@ -33,22 +37,63 @@
               </div>
             </form>
           </div>
-          <div class="flex justify-between items-center space-x-2">
-            <p class="bg-blue-400 p-3 text-xs font-semibold text-blue-900 my-auto transition hover:bg-white">Hello {{request.user | title}}</p>
-            <p>
-              <a class="hover:bg-white hover:text-red-600 bg-red-600 my-auto text-white p-3 text-xs font-semibold uppercase transition" href="{% url 'logout' %}">Logout</a>
-            </p>
+          <!-- <div class="hidden md:flex mx-auto">
+            <form action="" class="flex" method="get">
+              <input type="text" name="q" id="q" />
+              <button class="relative flex items-center rounded-r-lg bg-blue-400 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white transition duration-150 ease-in-out focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                  <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </form>
+          </div> -->
+      
+          <!-- Mobile menu toggle button -->
+          <div class="flex">
+      
+            <button id="mobileMenuButton" class="md:hidden text-white m-4 p-4 focus:outline-none">
+              <img class="bg-blue-400 rounded p-3" width="50" src="{% static 'images/menu.svg' %}" alt="">
+         
+            </button>
+            <button id="searchButton" class="button button--icon md:hidden text-white" type="submit" aria-label="Search">
+              <!-- <img class="font-bold" width="40"  src="{% static 'images/search.svg' %}" alt=""> -->
+            
+          
+          </div>
+        </button>
+      
+          <!-- Navigation links for medium and large screens -->
+          <div class="hidden md:flex justify-between items-center space-x-2">
+            {% if user.is_authenticated %}
+            <p class="bg-blue-400 p-3 text-xs font-semibold text-blue-900 transition duration-150 ease-in-out hover:bg-white">Hello {{request.user | title}}</p>
+            <a class="hover:bg-white hover:text-red-600 bg-red-600 p-3 text-xs font-semibold uppercase transition duration-150 text-white ease-in-out" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a class="bg-blue-400 p-3 text-xs font-semibold text-blue-900 transition duration-150 ease-in-out hover:bg-white" href="{% url 'logout' %}">Login</a>
+            {% endif %}
           </div>
         </div>
-      </nav>
-    </div>
-    <div class="grid grid-cols-4 mx-auto p-8 max-w-screen-2xl mt-32">
-      <div class="col-span-1">
-        <div class="mx-auto fixed">
-          <div class="sm:rounded-lg">
-            <table class="text-sm text-left">
+      
+        <!-- Mobile menu dropdown for small screens -->
+        <div class="mx-auto md:hidden">
+          <form action="" class="flex" method="get">
+            <input type="text" name="title" id="title" class="w-full" />
+            <!-- <div class="rounded-full">{{myFilter.form.title}}</div> -->
+            <button class="relative flex items-end rounded-r-lg bg-blue-400 px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white transition duration-150 ease-in-out focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0" type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </form>
+        </div>
+    
+        <div id="mobileMenu" class="md:hidden absolute top-full w-full right-0 p-4  bg-blue-800 shadow-md hidden">
+          <div class="mt-4 justify-between items-center space-y-4 w-full">
+            {% if user.is_authenticated %}
+           <p class="bg-blue-400 p-3 text-xs font-semibold text-blue-900 transition duration-150 ease-in-out hover:bg-white">Hello {{request.user | title}}</p>
+       
+            <table class="text-sm text-center w-full">
               <thead class="text-black border border-blue-600">
-                <th scope="row" class="px-6 py-4 font-bold text-lg text-blue-800 w-72">Categories</th>
+                <th scope="row" class="px-6 py-4 font-bold text-lg text-white w-72">Categories</th>
               </thead>
               <tbody>
                 <form action="" method="get" class="space-y-4 text-white p-4">
@@ -70,19 +115,63 @@
                 </tr>
               </tbody>
             </table>
+            <p class="hover:bg-white hover:text-red-600 bg-red-600 p-3 text-xs font-semibold uppercase transition duration-150 text-white ease-in-out">
+              <a href="{% url 'logout' %}">Logout</a>
+            </p>
+            {% else %}
+            <a class="bg-blue-400 p-3 text-xs font-semibold text-blue-900 transition duration-150 ease-in-out hover:bg-white" href="{% url 'logout' %}">Login</a>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+    </div>
+<!-- body -->
+    <div class="grid md:grid-cols-4 mx-auto p-8 max-w-screen-2xl mt-32">
+      <div class="mt-8 ">
+        <!-- LEFT SIDEBAR -->
+        <div class="mx-auto md:flex fixed">
+          <div class="md:flex hidden ">
+            <table class="text-sm text-left">
+              <thead class="text-black border border-blue-600">
+                <th scope="row" class=" px-6 py-4 font-bold text-lg text-blue-800 w-72">Categories</th>
+              </thead>
+              <tbody>
+                <form action="" method="get" class="space-y-4 text-white p-4">
+                  <div class="space-x-2">
+                    {% for category, label in myFilter.form.fields.category.choices %}
+                    <tr class="bg-blue-600 text-black hover:scale-105 hover:bg-blue-700 transition border-b">
+                      <th scope="row" class="px-6 py-4 font-medium text-white w-72"><a href="?category={{ category }}" class="p-2 text-white font-medium">{{ label }}</a></th>
+                    </tr>
+                    {% endfor %}
+                  </div>
+                </form>
+                <tr class="bg-red-600 text-black hover:scale-105 hover:bg-red-700 transition border-b">
+                  <th scope="row" class="px-6 py-4 w-72"><a href="{% url 'schema-swagger-ui' %}" target="_blank" class="text-white font-medium">API Documentation</a></th>
+                </tr>
+                <tr class="bg-red-600 text-black hover:scale-105 hover:bg-red-700 transition border-b">
+                  <th scope="row" class="px-6 py-4 w-72"><a href="{% url 'index' %}?country=us" class="block text-white font-medium">Non Database News</a></th>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      <div class="col-span-2 max-w-screen-2xl mx-auto">
-        <h1 class="text-center mx-auto text-2xl bg-blue-600 text-white p-4 m-4 w-3/4 font-mediu">These are articles stored in our database</h1>
 
-        <div class="grid col-span-2 grid-cols-1 mx-auto gap-4 p-8 w-full items-center text-center justify-center">
+      <!-- ARTiCLES -->
+      
+      
+      <div class="bg-blue-100 md:col-span-2 mx-auto">
+        <h1 class="text-center mx-auto md:text-2xl text-base bg-blue-600 text-white md:p-4 p-2 md:mt-8 mt-4 w-3/4 md:font-medium ">These are articles stored in our database</h1>
+        
+
+        <div class="md:grid md:col-span-2 md:grid-cols-1 mx-auto gap-4 md:p-8 p-4 w-full items-center text-center justify-center">
           {% for article in db_articles %}
-          <div class="p-8 bg-white shadow-md w-full rounded-lg flex-col justify-center gap-2 inline-flex">
-            <div class="font-bold text-xl">
+          <div class="p-8 bg-white shadow-sm rounded-lg flex-col justify-center gap-2 mb-4 inline-flex">
+            <div class="md:font-bold font-medium md:text-xl text-xs">
               <p>From {{article.source}}</p>
             </div>
             <a href="{% url 'single_news' article.slug %}">
+
               {% if article.image %}
               <img src="{{ article.image }}" alt="" />
               {% else %}
@@ -103,33 +192,20 @@
                 <div class="text-blue-800 mx-auto text-base font-light text-center items-center">
                   <p>Date Published: {{ article.timestamp|date:"M d, Y" }}</p>
                 </div>
-                <button class="mx-auto px-8 bg-blue-600 text-white p-4 rounded mt-4">
-                  <a href="{{article.url}}" target="_blank" class="text-white">Go to Full News</a>
+                <!-- <div class="w-full">
+                  Category: <p>{{ article.category}}</p>
+                </div> -->
+                <button class="mx-auto my-4 rounded px-6 py-4 bg-blue-800 hover:scale-105 hover:bg-blue-900 transition">
+                  <a href="{{article.url}}" target="_blank" class="md:text text-sm text-white">Go to Full News</a>
                 </button>
               </div>
             </a>
           </div>
-
           {% endfor %}
-          <div class="pagination m-4">
-            <span class="step-links">
-              {% if page.has_previous %}
-              <a href="?page=1" class="bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold">&laquo; first</a>
-              <a href="?page={{ page.previous_page_number }} " class="bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold">previous</a>
-              {% endif %}
-
-              <span class="current-page bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold" class="">{{ page.number }}</span>
-
-              {% if page.has_next %}
-              <a href="?page={{ page.next_page_number }}" class="bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold">next</a>
-              <a href="?page={{ page.paginator.num_pages }}" class="bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold">last &raquo;</a>
-              {% endif %}
-            </span>
-          </div>
         </div>
       </div>
-
-      <div class="w-full col-span-1">
+<!-- left side bar -->
+      <div class="w-full hidden md:flex col-span-1 p-4">
         <div class="mx-auto w-1/6 fixed">
           <form action="" method="get" class="space-y-4">
             <div>
@@ -143,11 +219,35 @@
                 <button type="submit" class="bg-blue-600 p-2.5 text-white my-auto font-medium">Search</button>
               </div>
             </div>
-
-            <div></div>
           </form>
         </div>
       </div>
     </div>
+     <!-- pagination -->
+     <div class="pagination m-4 mx-auto justify-center flex items-center p-4">
+      <span class="step-links">
+        {% if page.has_previous %}
+        <a href="?page=1" class="bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold">&laquo; first</a>
+        <a href="?page={{ page.previous_page_number }} " class="bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold">previous</a>
+        {% endif %}
+
+        <span class="current-page bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold" class="">{{ page.number }}</span>
+
+        {% if page.has_next %}
+        <a href="?page={{ page.next_page_number }}" class="bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold">next</a>
+        <a href="?page={{ page.paginator.num_pages }}" class="bg-blue-600 rounded-xl py-4 px-8 text-white font-semibold">last &raquo;</a>
+        {% endif %}
+      </span>
+    </div>
   </body>
+
+  <script>
+    // Toggle mobile menu visibility
+    document.getElementById("mobileMenuButton").addEventListener("click", function () {
+      document.getElementById("mobileMenu").classList.toggle("hidden");
+    });
+    document.getElementById("searchButton").addEventListener("click", function () {
+      document.getElementById("searchMenu").classList.toggle("hidden");
+    });
+  </script>
 </html>

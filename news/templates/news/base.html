@@ -5,21 +5,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
-
     <title>Echo</title>
+
     {% tailwind_css %}
   </head>
   <body>
-    <div class="py-4 w-full fixed top-0 bg-blue-800  ">{% include 'news/navbar.html' %}</div>
-    <div class="grid grid-cols-4 mx-auto p-8 max-w-screen-2xl mt-32">
-      <div class="col-span-1">{% include 'news/sidebarLeft.html' %}</div>
+    <div class="py-4 w-full fixed top-0 bg-blue-800">{% include 'news/navbar.html' %}</div>
+    <div class="md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-auto p-8 max-w-screen-2xl mt-32">
+      <!--LEFT  -->
+      <div class="md:col-span-1 md:flex hidden">{% include 'news/sidebarLeft.html' %}</div>
 
-      <!--  -->
-      <div class="col-span-2 max-w-screen-2xl mx-auto">{% block content %}{% endblock content %}</div>
+      <!-- CENTER -->
+      <div class="md:col-span-2 mx-auto bg-blue-100 md:mt-2 mt-20">{% block content %}{% endblock content %}</div>
 
-      <!--  -->
-
-      <div class="w-full col-span-1">{% include 'news/sidebarRight.html' %}</div>
+      <!-- RIGHT -->
+      <div class="w-full md:col-span-1 md:hidden hidden lg:flex p-4">{% include 'news/sidebarRight.html' %}</div>
     </div>
   </body>
 </html>

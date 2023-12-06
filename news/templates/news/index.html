@@ -1,13 +1,14 @@
 {% extends 'news/base.html' %} {% load static tailwind_tags %}{% block content%}
-<h1 class="text-center mx-auto text-2xl bg-blue-600 text-white p-4 m-4 w-3/4 font-medium">These are articles gotten from all over the world</h1>
+<h1 class="text-center mx-auto md:text-2xl text-base bg-blue-800 text-white md:p-4 md:mt-8 p-4 mt-8 w-3/4 md:font-medium">These are articles gotten from all over the world</h1>
 
-<div class="grid col-span-2 grid-cols-1 mx-auto gap-4 p-8 w-full items-center text-center justify-center">
+<div class="md:grid md:col-span-2 md:grid-cols-1 mx-auto gap-4 md:p-8 p-4 w-full items-center text-center justify-center">
   {% for article in articles %}
 
-  <div class="p-8 bg-white shadow-md w-full rounded-lg flex-col justify-center gap-2 inline-flex">
-    <div class="font-bold text-xl">
+  <div class="p-8 bg-white shadow-sm rounded-lg flex-col justify-center gap-2 mb-4 inline-flex">
+    <div class="md:font-bold font-medium md:text-xl text-xs">
       <p>From {{article.source.name}}</p>
     </div>
+
     {% if article.urlToImage %}
     <img src="{{ article.urlToImage }}" alt="" />
     {% else %}
@@ -29,7 +30,7 @@
         <p>Date Published: {{ article.publishedAt}}</p>
       </div>
       <button class="mx-auto my-4 rounded px-6 py-4 bg-blue-800 hover:scale-105 hover:bg-blue-900 transition">
-        <a href="{{ article.url }}" target="_blank" class="text-white">Go to Full News</a>
+        <a href="{{ article.url }}" target="_blank" class="md:text text-sm text-white">Go to Full News</a>
       </button>
     </div>
   </div>

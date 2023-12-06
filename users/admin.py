@@ -8,7 +8,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ["username", "first_name", "last_name", "email"]  # noqa
+    list_display = ["username", "first_name", "last_name", "email", "is_active"]  # noqa
     list_filter = ["username",]  # noqa
     list_display_links = ["username"]  # noqa
     fieldsets = (

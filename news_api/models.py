@@ -22,7 +22,7 @@ class Article(models.Model):
     title = models.CharField(blank=True, null=True, max_length=500)  # noqa
     content = models.TextField(blank=True, null=True)  # noqa
     image = models.ImageField(upload_to="images/", max_length=1000, blank=True, null=True)  # noqa
-    category = models.CharField(choices=ArticleCategory.choices, max_length=255, default=ArticleCategory.ENTERTAINMENT)  # noqa
+    category = models.CharField(choices=ArticleCategory.choices, max_length=255, default=ArticleCategory.BUSINESS)  # noqa
     reporter = models.ForeignKey(CustomUser, on_delete=models.CASCADE, default=1, null=True)  # noqa
     author = models.CharField(blank=True, max_length=255, null=True, default="unknown")  # noqa
     excerpt = models.TextField(blank=True, default='Default excerpt', null=True)  # noqa
