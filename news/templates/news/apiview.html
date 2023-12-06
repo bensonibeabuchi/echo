@@ -129,11 +129,11 @@
     <div class="grid md:grid-cols-4 mx-auto p-8 max-w-screen-2xl mt-32">
       <div class="mt-8 ">
         <!-- LEFT SIDEBAR -->
-        <div class="mx-auto md:flex fixed">
+        <div class="md:col-span-1 md:flex hidden"">
           <div class="md:flex hidden ">
             <table class="text-sm text-left">
               <thead class="text-black border border-blue-600">
-                <th scope="row" class=" px-6 py-4 font-bold text-lg text-blue-800 w-72">Categories</th>
+                <th scope="row" class="px-6 py-4 font-bold text-lg text-blue-800 lg:w-56 md:w-56 xl:w-72">Categories</th>
               </thead>
               <tbody>
                 <form action="" method="get" class="space-y-4 text-white p-4">
@@ -160,8 +160,8 @@
       <!-- ARTiCLES -->
       
       
-      <div class="bg-blue-100 md:col-span-2 mx-auto">
-        <h1 class="text-center mx-auto md:text-2xl text-base bg-blue-600 text-white md:p-4 p-2 md:mt-8 mt-4 w-3/4 md:font-medium ">These are articles stored in our database</h1>
+      <div class="md:col-span-2 mx-auto bg-blue-100 md:mt-2 mt-20">
+        <h1 class="text-center mx-auto md:text-2xl text-base bg-blue-800 text-white md:p-4 md:mt-8 p-4 mt-8 w-3/4 md:font-medium">These are articles stored in our database</h1>
         
 
         <div class="md:grid md:col-span-2 md:grid-cols-1 mx-auto gap-4 md:p-8 p-4 w-full items-center text-center justify-center">
@@ -192,9 +192,7 @@
                 <div class="text-blue-800 mx-auto text-base font-light text-center items-center">
                   <p>Date Published: {{ article.timestamp|date:"M d, Y" }}</p>
                 </div>
-                <!-- <div class="w-full">
-                  Category: <p>{{ article.category}}</p>
-                </div> -->
+           
                 <button class="mx-auto my-4 rounded px-6 py-4 bg-blue-800 hover:scale-105 hover:bg-blue-900 transition">
                   <a href="{{article.url}}" target="_blank" class="md:text text-sm text-white">Go to Full News</a>
                 </button>
@@ -205,7 +203,7 @@
         </div>
       </div>
 <!-- left side bar -->
-      <div class="w-full hidden md:flex col-span-1 p-4">
+      <div class="w-full md:col-span-1 md:hidden hidden lg:flex p-4">
         <div class="mx-auto w-1/6 fixed">
           <form action="" method="get" class="space-y-4">
             <div>
