@@ -105,24 +105,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ECHO.wsgi.application'
 
 
-
-
 DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'), conn_max_age=1800),
+
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('POSTGRESS_USERNAME'),
+        'USER': 'postgres',
+        'PASSWORD': config('POSTGRESS_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
 }
-
-# DATABASES = {
-
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config('POSTGRESS_USERNAME'),
-#         'USER': 'postgres',
-#         'PASSWORD': config('POSTGRESS_PASSWORD'),
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-
 
 
 
