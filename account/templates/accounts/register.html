@@ -71,12 +71,12 @@
               {% endfor %}
               <!-- {{ form.errors }} -->
               {% for error, fields in form.errors.items %}
-              <div id="message" class="bg-red-100 mx-auto w-96 border border-red-400 text-red-700 px-4 mt-8 py-3 rounded relative alert alert-dismissible fade show flex" role="alert">
+              <div id="message" class="bg-red-100 mx-auto w-96 border border-red-400 text-red-700 px-4 mt-8 py-3 rounded relative alert alert-dismissible fade show flex items-center justify-center text-center" role="alert">
                 <button onclick="closeAlert(this)" type="button" class="px-8" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <div class="flex space-x-2">
-                  <p>{{ error|title }}:</p>
+                <div class="flex space-x-2 items-center justify-center text-center">
+                  {% comment %} <p>{{ error|title }}:</p> {% endcomment %}
                    <p>{{fields}}</p> 
                 </div>
                 

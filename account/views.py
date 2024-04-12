@@ -51,8 +51,7 @@ def register_page(request):
         if request.method == 'POST':
             form = CustomUserCreationForm(request.POST)
             if form.is_valid():
-                user = form.save(commit=False)
-                user.is_active = False  # Deactivate the user until email confirmation
+                user = form.save()
 
                 # Check password complexity
                 password = form.cleaned_data['password1']
@@ -71,20 +70,23 @@ def register_page(request):
                 user.save()
 
                # Send email confirmation
-                current_site = get_current_site(request)
-                subject = 'Activate your account'
-                message = render_to_string('accounts/account_activation_email.html', {
-                    'user': user,
-                    'domain': current_site,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': default_token_generator.make_token(user),
-                })
-                to_email = email
-                send_email = EmailMessage(subject, message, to=[to_email])
-                send_email.send()
+                # current_site = get_current_site(request)
+                # subject = 'Activate your account'
+                # message = render_to_string('accounts/account_activation_email.html', {
+                #     'user': user,
+                #     'domain': current_site,
+                #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                #     'token': default_token_generator.make_token(user),
+                # })
+                # to_email = email
+                # send_email = EmailMessage(subject, message, to=[to_email])
+                # send_email.send()
+                
+                login(request, user)
+                messages.success(request, 'You have been successfully registered.')
 
                 # messages.success(request, 'Thank you for registering with us. Kindly check your email to activate your Account')  # noqa
-                return redirect('account_activation_sent')
+                return redirect('index')
 
                 # messages.success(
                 # request, f'Account was created for {user.username}')

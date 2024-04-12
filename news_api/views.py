@@ -47,7 +47,7 @@ def get_article(request):
     A request to update the articles on the database from sources all over the world automatically
     """
 
-    url = f'https://newsapi.org/v2/top-headlines?country=us&category=BUSINESS&apiKey={API_KEY2}'
+    url = f'https://newsapi.org/v2/top-headlines?country=us&category=GENERAL&apiKey={API_KEY2}'
     headers = {'X-Api-Key': API_KEY}
     response = requests.get(url, headers=headers)
 

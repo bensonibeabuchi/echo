@@ -30,11 +30,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 
-ALLOWED_HOSTS = ['echo1-048a0f46d862.herokuapp.com', '127.0.0.1',]
+ALLOWED_HOSTS = ['*','echo-news.up.railway.app', '127.0.0.1',]
 
 
 # Application definition
@@ -105,17 +105,34 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ECHO.wsgi.application'
 
 
-DATABASES = {
+# Local Database, use when you work locally
 
+# DATABASES = {
+
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': config('POSTGRESS_USERNAME'),
+#         'USER': 'postgres',
+#         'PASSWORD': config('POSTGRESS_PASSWORD'),
+#         'HOST': 'localhost',
+#         'PORT': '5432'
+#     }
+# }
+
+
+# Railway Database, use when you want to push to the web
+
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': config('POSTGRESS_USERNAME'),
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': config('POSTGRESS_PASSWORD'),
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'PASSWORD': config('PASSWORD'),
+        'HOST': config('RAILWAY_HOST'),
+        'PORT': config('PORT'),
     }
 }
+
 
 
 
