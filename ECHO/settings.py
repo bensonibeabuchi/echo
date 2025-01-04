@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from decouple import config
-import dj_database_url
 from datetime import timedelta
 
 from django.contrib.messages import constants as messages
@@ -107,31 +106,31 @@ WSGI_APPLICATION = 'ECHO.wsgi.application'
 
 # Local Database, use when you work locally
 
-# DATABASES = {
+DATABASES = {
 
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config('POSTGRESS_USERNAME'),
-#         'USER': 'postgres',
-#         'PASSWORD': config('POSTGRESS_PASSWORD'),
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': config('POSTGRESS_USERNAME'),
+        'USER': 'postgres',
+        'PASSWORD': config('POSTGRESS_PASSWORD'),
+        'HOST': 'localhost',
+        'PORT': '5432'
+    }
+}
 
 
 # Railway Database, use when you want to push to the web
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': config('PASSWORD'),
-        'HOST': config('RAILWAY_HOST'),
-        'PORT': config('PORT'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': config('PASSWORD'),
+#         'HOST': config('RAILWAY_HOST'),
+#         'PORT': config('PORT'),
+#     }
+# }
 
 
 
